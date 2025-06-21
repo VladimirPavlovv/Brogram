@@ -5,7 +5,7 @@ import { exerciseDescriptions } from "../utils"
 
 export default function WorkoutCard(props) {
 
-    const { trainingPlan, workoutIndex, type, dayNum, icon, savedWeights, handleSave, handleComlete } = props
+    const { trainingPlan, workoutIndex, type, dayNum, icon, savedWeights, handleSave, handleComplete } = props
     const { warmup, workout } = trainingPlan || {}
     const [showExerciseDescription, setShowExerciseDescription] = useState(null)
     const [weights, setWeights] = useState(savedWeights || {})
@@ -88,7 +88,7 @@ export default function WorkoutCard(props) {
                             </div>
                             <p className="exercise-info">{workoutExercise.sets}</p>
                             <p className="exercise-info">{workoutExercise.reps}</p>
-                            <input value={weights[warmupExercise.name] || ''}
+                            <input value={weights[workoutExercise.name] || ''}
                              onChange={(e) => {
                                 handleAddWeight(workoutExercise.name, e.target.value)
                              }} className="weight-input" placeholder="14" />
@@ -103,7 +103,7 @@ export default function WorkoutCard(props) {
                     handleSave(workoutIndex, { weights })
                 }}>Save & Exit</button>
                 <button onClick={() => {
-                    handleComlete(workoutIndex, { weights })
+                    handleComplete(workoutIndex, { weights })
                 }} disabled={ Object.keys(weights).length !== workout.length }>Complete</button>
             </div>
         </div>
