@@ -26,7 +26,7 @@ export default function Grid() {
         }
         setSavedWorkouts(newObj)
         localStorage.setItem('brogram', JSON.stringify(newObj))
-        setSavedWorkouts(null)
+        setSelectedWorkout(null)
     }
 
     function handleComplete(index, data){
@@ -36,7 +36,7 @@ export default function Grid() {
     }
 
     useEffect(() => {
-        if (!localStorage || !savedWorkouts) { return }
+        if (!localStorage) { return }
         let savedData = {}
         if (localStorage.getItem('brogram')) {
             savedData = JSON.parse(localStorage.getItem('brogram'))
@@ -50,7 +50,7 @@ export default function Grid() {
             {Object.keys(training_plan).map((workout, workoutIndex) => {
                 const isLocked = workoutIndex === 0 ? 
                     false : 
-                    !completedWorkouts.includes('${workoutIndex - 1}')
+                    !completedWorkouts.includes(`${workoutIndex - 1}`)
                 const type = workoutIndex % 3 === 0 ? 'Push' : workoutIndex % 3 === 1 ? 'Pull' : 'Legs'
 
                 const trainingPlan = training_plan[workoutIndex]
@@ -81,10 +81,11 @@ export default function Grid() {
                     }} className={'card plan-card ' + (isLocked ? 'inactive' : '')} key={workoutIndex}>
                         <div className='plan-card-header'>
                             <p>Day {dayNum}</p>
-                        </div>
                         {isLocked ? (
                             <i className='fa-solid fa-lock'></i> 
                         ) : (icon)}
+                        </div>
+                        
                         <div className='plan-card-header'>
                             <h4><b>{type}</b></h4>
                         </div>

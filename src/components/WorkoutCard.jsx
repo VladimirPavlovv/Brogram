@@ -6,11 +6,8 @@ import { exerciseDescriptions } from "../utils"
 export default function WorkoutCard(props) {
 
     const { trainingPlan, workoutIndex, type, dayNum, icon, savedWeights, handleSave, handleComlete } = props
-
     const { warmup, workout } = trainingPlan || {}
-
     const [showExerciseDescription, setShowExerciseDescription] = useState(null)
-
     const [weights, setWeights] = useState(savedWeights || {})
 
     function handleAddWeight(title, weight) {
@@ -92,7 +89,7 @@ export default function WorkoutCard(props) {
                             <p className="exercise-info">{workoutExercise.sets}</p>
                             <p className="exercise-info">{workoutExercise.reps}</p>
                             <input value={weights[warmupExercise.name] || ''}
-                             onChange={() => {
+                             onChange={(e) => {
                                 handleAddWeight(workoutExercise.name, e.target.value)
                              }} className="weight-input" placeholder="14" />
                         </React.Fragment>

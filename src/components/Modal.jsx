@@ -6,7 +6,7 @@ export default function Modal(props) {
     const { name, description } = showExerciseDescription || {}
 
     return ReactDom.createPortal((
-        <div>
+        <div className="modal-container">
             <button className="modal-underlay" onClick={handleCloseModal} />
             <div className="modal-content">
                 <div>
@@ -20,6 +20,6 @@ export default function Modal(props) {
             </div>
         </div>
     ),
-     document.getElementById('portal')
+        document.getElementById('portal')
     )
 }
